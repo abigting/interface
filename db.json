@@ -1,10 +1,10 @@
 {
-  "posts": [
-    {
-      "id": 1,
-      "title": "hello"
+  "xhr/search/displayBar.json": {
+    "code": "200",
+    "data": {
+      "count": 23192
     }
-  ],
+  },
   "profile": {
     "name": "typicode"
   }

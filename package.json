@@ -1,0 +1,30 @@
+{
+  "name": "interface",
+  "version": "1.0.0",
+  "description": "node interface test",
+  "main": "index.js",
+  "scripts": {
+    "start": "hotnode index.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/abigting/interface.git"
+  },
+  "keywords": [
+    "node",
+    "api"
+  ],
+  "author": "Fiona",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/abigting/interface/issues"
+  },
+  "homepage": "https://github.com/abigting/interface#readme",
+  "dependencies": {
+    "body-parser": "^1.19.0",
+    "cors": "^2.8.5",
+    "express": "^4.17.1",
+    "mysql": "^2.17.1"
+  }
+}

@@ -10,7 +10,7 @@ const userSQL = require('../db/userSQL')
  */
 router.get('/login', (req, res) => {
   let user = {
-    username: req.query.name,
+    username: req.query.username,
     password: req.query.password
   }
   let _res = res;

@@ -5,12 +5,13 @@ const router = express.Router();
 
 // 解析参数
 const bodyParser = require('body-parser')
-let login = true;
 // json请求
 app.use(bodyParser.json())
 // 表单请求
 app.use(bodyParser.urlencoded({extended: false}))
-
+/**
+ * 配置mysql
+ */
 const option = {
   host: 'localhost',
   user: 'test',
@@ -22,10 +23,13 @@ const option = {
 }
 let pool;
 repool()
-function Result ({ code = 1, msg = '', data = {} }) {
+function Res ({ code = 200, msg = '', data = {} }) {
   this.code = code;
   this.msg = msg;
   this.data = data;
+}
+function resJson (_res, result) {
+  return _res.json(new Res(result))
 }
 // 断线重连机制
 function repool() {
@@ -45,5 +49,4 @@ function repool() {
     })
   })
 }
-
-module.exports = { app, pool, Result, router }
+module.exports = { app, pool, router, resJson }

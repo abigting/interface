@@ -60,7 +60,6 @@ router.get('/login', (req, res) => {
 /**
  * 注册用户功能
  */
-
 router.get('/register', (req, res) => {
   // 获取前台页面传过来的参数
   let user = {
@@ -255,6 +254,57 @@ router.get('/deleteUser', (req, res) => {
           _data = {
             code: -1,
             msg: '用户不存在，操作失败'
+          }
+        }
+      }
+      setTimeout(() => {
+        //把操作结果返回给前台页面
+        resJson(_res, _data)
+      }, 200);
+    })
+    pool.releaseConnection(conn) // 释放连接池，等待别的连接使用
+  })
+})
+
+/**
+ * 获取用户列表
+ */
+router.get('/getUserList', (req, res) => {
+  // 获取前台页面传过来的参数
+  let user = {
+    username: req.query.name
+  }
+  let _res = res;
+
+  let _data;
+  // 整合参数
+  // 从连接池获取连接
+  pool.getConnection((err, conn) => {
+    // 查询数据库该用户是否已存在
+    conn.query(userSQL.queryAll, (e, r) => {
+      if (e) _data = {
+        code: -1,
+        msg: e
+      }
+      if (r) {
+        //判断用户列表是否为空
+        if (r.length) {
+          //如不为空，则说明存在此用户
+          conn.query(userSQL.queryAll, (err, result) => {
+            if (err) _data = {
+              code: -1,
+              msg: e
+            }
+            if (result) {
+              _data = {
+                msg: result
+              }
+            }
+          })
+        } else {
+          _data = {
+            code: -1,
+            msg: '获取用户列表失败'
           }
         }
       }
